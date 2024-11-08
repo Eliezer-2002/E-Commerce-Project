@@ -1,0 +1,71 @@
+{% extends 'shop/layouts/main.html' %}
+{% load static %}
+{% block title %}
+ShopKart | Registration
+{% endblock %}
+{% block content %}
+<div class="d-block" style="min-height: 100vh;">
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-12">
+        <h4 style="margin-top: 120px;">User Registration</h4>
+      </div>
+      <hr  style="border: #899194 solid 1px ;">
+      {% include 'shop/inc/message.html' %}
+    </div>
+  </div>
+  <section class="my-4 py-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <form action="" method="post">
+            {% csrf_token %}
+            <label for="" class="form-label">User Name</label>
+            <div class="mb-4">
+              {{form.username}}
+            </div>
+            <label for="" class="form-label">Email Address</label>
+            <div class="mb-4">
+              {{form.email}}
+            </div>
+            <label for="" class="form-label">Password</label>
+            <div class="mb-4">
+              {{form.password1}}
+            </div>
+            <label for="" class="form-label">Confirm Password</label>
+            <div classs="mb-4">
+              {{form.password2}}
+            </div>
+            <button type="submit" class="btn btn-primary mt-5">Register</button>
+          </form>
+          <p class="my-2">Already a User? <a href="{% url 'log_in' %}"> Login</a></p>
+        </div>
+        <div class="col-6 mt-4">
+          {% if form.errors.username %}
+          <div class="mb-5">
+            <label for="" class="text-danger">{{form.errors.username}}</label>
+          </div>
+          {% endif %}
+          {% if form.errors.email %}
+          <div class="mb-5">
+            <label for="" class="text-danger">{{form.errors.email}}</label>
+          </div>
+          {% endif %}
+          {% if form.errors.password1 %}
+          <div class="mb-5">
+            <label for="" class="text-danger">{{form.errors.password1}}</label>
+          </div>
+          {% endif %}
+          {% if form.errors.password2 %}
+          <div classs="mb-5">
+            <label for="" class="text-danger">{{form.errors.password2}}</label>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %} 
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'shop/layouts/main.html' %}
+{% load static %}
+{% block title %}
+ShopKart | Online Shoping
+{% endblock %}
+{% block content %}
+{% include 'shop/inc/slider.html' %}
+  <section class="bg-light py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-12"> 
+          {% include 'shop/inc/message.html' %} 
+          <h4>Best Offered Products</h4>
+          <hr  style="border: #899194 solid 1px ;">  
+        </div>
+      </div>
+      <div class="d-flex flex-wrap">
+        {% for item in Offered_Products %}
+        <div class="card rounded-0 border-0" style="width: 220px; margin: 10px">
+          <div class="outer-wrapper">
+            {% if item.product_image %}
+            <img src="{% static  item.product_image %}" height="120px" alt="{{item.name}}">
+            {% else %}
+            <div>No image Available</div>
+            {% endif %}
+          </div>
+          <hr style="border: #cbced0 solid 1px ; margin: 0;">
+          <a href="{% url 'product_details' item.category.slug item.slug %}">
+            <div class="card-body px-3 py-1" style=" border-bottom: rgb(191, 191, 196) solid 1px;">
+              <h6 class="card-title text-primary" style="height: 40px; margin: 0;">{{item.name | truncatewords:3}}</h6>
+              <div class="d-flex">
+                  <h6 class="og-price me-auto">Rs.{{item.original_price | stringformat:'d'}}</h6>
+                  <h6 class="sel-price">Rs.{{item.selling_price | stringformat:'d'}}</h6>
+              </div>
+            </div>
+          </a>
+        </div>    
+        {% endfor %}
+      </div>
+      <hr style="border: #899194 solid 1px ;">
+    </div>
+</section>
+{% endblock %}
+{% block scripts %} 
+{% endblock %}

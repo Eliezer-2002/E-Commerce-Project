@@ -1,0 +1,39 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+ShopKart | Cart
+{% endblock %}
+{% block content %}
+  <section class="bg-light py-4 mt-5">    
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4>Favourite Items</h4>
+          <hr  style="border: #899194 solid 1px ;">
+        </div>
+      </div>
+        <table class="table" style="border-right: 2px #e8eaeb solid ;">
+          <thead>
+            <tr>
+              <th class="colm1">Image</th>  
+              <th class="colm2">Name</th>  
+              <th class="colm3">Unit Price</th>  
+              <th class="colm6">Remove</th>  
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in fav %}
+            <tr>
+              <td class="colm1"><img src="{{item.product.product_image.url}}" height="90px" alt="{{item.product.name}}"></td>
+              <td class="colm2">{{item.product.name}}</td>
+              <td class="colm3">Rs : {{item.product.selling_price | stringformat:'d' }}</td>
+              <td class="colm6"><a href="{% url 'deleteFavItem' item.id %}" onclick="return confirm('Are you sure? to Remove')" class="btn btn-danger btn-sm"><i class="fa fa-trash" style="margin-right: 10px;"></i>Remove</a></td>
+            </tr>  
+            {% endfor %}
+          </tbody>
+        </table>
+      <hr style="border: #899194 solid 1px ;">
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %} 
+{% endblock %}

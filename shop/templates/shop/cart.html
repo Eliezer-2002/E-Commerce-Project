@@ -1,0 +1,63 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+ShopKart | Cart
+{% endblock %}
+{% block content %}
+  <section class="bg-light py-4 mt-5">    
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4>Cart Items</h4>
+          <hr  style="border: #899194 solid 1px ;">
+        </div>
+      </div>
+        <table class="table" style="border-right: 2px #e8eaeb solid ;">
+          <thead>
+            <tr>
+              <th class="colm1">Image</th>  
+              <th class="colm2">Name</th>  
+              <th class="colm3">Unit Price</th>  
+              <th class="colm4">Quantity</th>  
+              <th class="colm5">Amount</th>  
+              <th class="colm6">Remove</th>  
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+            <tr>
+              <td class="colm1"><img src="{{item.product.product_image.url}}" height="90px" alt="{{item.product.name}}"></td>
+              <td class="colm2">{{item.product.name}}</td>
+              <td class="colm3">Rs : {{item.product.selling_price | stringformat:'d' }}</td>
+              <td class="colm4">{{item.product_qty}}</td>
+              <td class="colm5"><p style="display: inline;">Rs : </p><p style="display: inline;" class="amt">{{item.total_cost | stringformat:'d' }}</p></td>
+              <td class="colm6"><a href="{% url 'deleteCartItem' item.id %}" onclick="return confirm('Are you sure? to Remove')" class="btn btn-danger btn-sm"><i class="fa fa-trash" style="margin-right: 10px;"></i>Remove</a></td>
+            </tr>  
+            {% endfor %}
+          </tbody>
+          <tfoot class="tbl-foot">
+            <tr>
+              <td></td>
+              <td></td>
+              <td class="colm4" colspan="2"><b>Total Amount</b></td>
+              <td class="colm5" id="total">0</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      <hr style="border: #899194 solid 1px ;">
+    </div>
+  </section>
+ 
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const nodes = document.querySelectorAll(".amt");
+  const arr = Array.from(nodes);
+  const res = arr.reduce((accu,curr)=>{
+      return accu += Number(curr.textContent);
+  }, 0);
+  document.getElementById("total").innerHTML =`<b>Rs : ${res}</b>`;
+  console.log(res);
+</script>
+{% endblock %}

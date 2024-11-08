@@ -1,0 +1,110 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+ShopKart | Collections
+{% endblock %}
+{% block content %}
+{% if not request.user.is_authenticated %}
+  <section class="py-2 text-center container" style="margin-top: 70px;">
+    <div class="row py-lg-5" >
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Not logged in</h1>
+        <p class="lead text-muted">Log in now to unlock the full shopping experience! Enjoy seamless access to your <b>Own Cart and Favorite items.</b></p>
+        <p>
+          <a href="{% url 'log_in' %}" class="btn btn-primary my-2 mx-2">Already User</a>
+          <a href="{% url 'register' %}" class="btn btn-secondary my-2 mx-2">Register</a>
+        </p>
+      </div>
+    </div>
+  </section>
+{% endif %}
+  <section class="bg-light py-4 mt-5">    
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4>Categories</h4>
+          <div id="myBtnContainer">
+            <button class="sup-category-btn active" onclick="filterSelection('all')"> Show All</button>
+            {% for item in SupCategory %}
+              <button class="sup-category-btn" onclick="filterSelection('{{ item.name }}')"> {{item.name}}</button>
+            {% endfor %}
+          </div>
+          <hr  style="border: #899194 solid 1px ;">
+          {% include 'shop/inc/message.html' %}
+        </div>
+      </div>
+      <div class="d-flex flex-wrap">
+        {% for item in Category %}
+          <div class="card rounded-0 border-0 category-item" data-category="{{ item.sup_category.name }}" style="width: 200px; margin: 10px;">
+              <div class="outer-wrapper">
+                  {% if item.image and item.image.url %}
+                  <img src="{{item.image.url}}" alt="No Image " height="150px">
+                  {% else %}
+                  <div class="no-image">No Image</div>
+                  {% endif %}
+              </div>
+              <hr style="border: #cbced0 solid 1px ; margin: 0;">
+              <a href="{% url 'Products' item.slug %}">
+                  <div class="card-body px-3 py-1" style="border-bottom: rgb(191, 191, 196) solid 1px;">
+                      <h6 class="card-title text-primary">{{item.name}}</h6>
+                      <p class="card-text text-secondary" style="height: 100px;">{{item.description}}</p>
+                  </div>
+              </a> 
+          </div>  
+       {% endfor %}
+      </div>
+      <hr style="border: #899194 solid 1px ;">
+    </div>
+  </section>
+ 
+{% endblock %}
+{% block scripts %} 
+<script>
+  filterSelection('all')
+  function filterSelection(category) {
+    var items, i;
+    items = document.getElementsByClassName("category-item");
+    if (category === "all") category = "";
+    for (i = 0; i < items.length; i++) {
+        removeClass(items[i], "show");
+        if (items[i].getAttribute("data-category") === category || category === "") {
+            addClass(items[i], "show");
+        }
+    }
+}
+
+function addClass(element, name) {
+    var arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (var i = 0; i < arr2.length; i++) {
+        if (arr1.indexOf(arr2[i]) == -1) {
+            element.className += " " + arr2[i];
+        }
+    }
+}
+
+function removeClass(element, name) {
+    var arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (var i = 0; i < arr2.length; i++) {
+        while (arr1.indexOf(arr2[i]) > -1) {
+            arr1.splice(arr1.indexOf(arr2[i]), 1);
+        }
+    }
+    element.className = arr1.join(" ");
+}
+
+var btns = document.getElementsByClassName("sup-category-btn");
+for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+        // Remove the active class from all buttons
+        for (var j = 0; j < btns.length; j++) {
+            btns[j].classList.remove("active");
+        }
+        // Add the active class to the clicked button
+        this.classList.add("active");
+    });
+}
+</script>
+{% endblock %}
