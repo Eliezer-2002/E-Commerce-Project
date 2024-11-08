@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playwrite+DE+Grund:wght@100..400&display=swap');
+html{
+    font-size: 14;
+}
+body{
+    font-family: "Noto Sans", sans-serif;
+}
+a{
+    text-decoration: none;
+}
+.carousel-item img{
+    object-fit: cover;
+    object-position: top;
+    height: 70vh;
+    overflow: hidden;
+}
+#carouselExampleIndicators{
+    margin-top: 55px;
+}
+.items{
+    background-color: white;
+}
+.outer-wrapper{
+    display: inline-block;
+    margin: 10px 5px;
+    text-align: center;
+    vertical-align: middle;
+}  
+.no-image{
+    background-color: #e4eaec;
+    height: 155px;
+    width: 155px;
+    padding-top: 62px;
+    font-weight: bold;
+    font-size: x-large;
+    color: white;
+}
+.img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+.og-price{
+    text-decoration: line-through;
+    color: red;
+    padding:  5px 5px 5px 0;
+}
+.sel-price{
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-size-adjust: 1px;
+}
+.parent{
+    width: auto;
+    height: 72px;
+    overflow: hidden;
+}
+.child{ 
+    height: 100%;
+    margin-right: -23px;
+    padding-right: 23px;
+    overflow-y: scroll;
+}
+.pic-box{
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    border-bottom: rgb(191, 191, 196) solid 2px;
+    width: 350px;
+}
+.bestoffer{
+    background-color: rgb(39, 185, 39);
+    color: white;
+    padding: 3px 5px;
+    border-radius: 5px;
+    display: inline;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+}
+.colm1,.colm2,.colm3,.colm4,.colm5,.colm6{
+    text-align: center;
+    vertical-align: middle;
+}
+.tbl-foot tr td{
+    background-color: rgb(35, 113, 35);
+    color: white;
+}
+
+/* Style the buttons */
+.sup-category-btn {
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    background-color: white;
+    cursor: pointer;
+    margin: 0 5px 10px 0;
+}
+  
+/* Add a grey background color on mouse-over */
+.sup-category-btn:hover {
+  background-color: #ddd;
+}
+
+/* Add a dark background color to the active button */
+.sup-category-btn.active {
+  background-color: #666;
+   color: white;
+}
+
+.category-item {
+    display: none;
+}
+
+.category-item.show {
+    display: block;
+    text-align: center;
+}
